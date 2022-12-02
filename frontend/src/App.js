@@ -2,13 +2,15 @@ import { Route, Routes , Navigate} from "react-router-dom";
 
 import Todos from "../src/pages/Todos";
 import Tasks from "../src/pages/Tasks";
+import Signup from "./pages/Signup";
 
 function App() {
   return (
     <div>
       <Routes>
          {/* Redirecting to todos page  */}
-         <Route path="/" element={<Navigate replace to="/todos" />} />
+         {/* <Route path="/" element={<Navigate replace to="/todos" />} /> */}
+         <Route path="/signup" exact element={<Signup/>}/>
         <Route path="/todos" exact element={<Todos/>}/>
         <Route path="/todos/:todoId" element = {<Tasks/>}/>
       </Routes>
