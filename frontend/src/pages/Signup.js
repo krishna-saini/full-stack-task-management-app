@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { account } from "../config/appwriteConfig";
 import { ID } from "appwrite";
 import axios from "axios";
+import { useNavigate, Link  } from "react-router-dom";
+
 
 function Signup() {
   const [user, setUser] = useState({ name: "", email: "", password: "" });
+  const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -24,7 +27,7 @@ function Signup() {
         email: newUser.email,
         id: newUser.$id,
       });
-      //   navigate('./')
+      navigate("/todos");
     } catch (err) {
       console.log("Error: ", err.message);
     }
@@ -78,6 +81,11 @@ function Signup() {
         />
         <button>SignUp</button>
       </form>
+      <div>
+        <span>
+          Already Have an Account? <Link to="/login">Log in</Link>
+        </span>
+      </div>
     </div>
   );
 }

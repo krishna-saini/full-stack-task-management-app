@@ -4,6 +4,7 @@ import TodoItem from "./TodoItem";
 
 function TodoList(props) {
   const [todos, setTodos] = useState(props.todos);
+  // console.log(todos);
   
   const deleteTodoHandler = (deletedId) => {
     setTodos(todos.filter((todo) => todo._id !== deletedId));

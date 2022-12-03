@@ -9,7 +9,7 @@ function TodoItem(props) {
 
   const navigate = useNavigate();
 
-  const updataData = async () => {
+  const updateData = async () => {
     try {
       // validate updated todo
       if (!updatedTitle) {
@@ -36,15 +36,15 @@ function TodoItem(props) {
   };
 
   const blurHandler = (e) => {
-    setInputDisabled(true);
+    // setInputDisabled(true);
     // send update request to server
-    updataData();
+    updateData();
     setIsEditTag(!isEditTag);
   };
 
   const editHandler = () => {
     // make input editable
-    setInputDisabled(!inputDisabled);
+    // setInputDisabled(!inputDisabled);
     setIsEditTag(!isEditTag);
   };
 
@@ -55,15 +55,19 @@ function TodoItem(props) {
     props.onDeleteTodo(props.todoId)
   };
 
+  const clickHandler = (e)=>{
+    console.log("fom clikceker");
+  }
+
 
   return (
-    <div>
+    <li onClick={clickHandler}>
       <input
         type="text"
         id="title"
         name="title"
         value={updatedTitle}
-        disabled={inputDisabled}
+        disabled={isEditTag}
         // onFocus={focusHandler}
         onBlur={blurHandler}
         onChange={(e) => setUpdatedTitle(e.target.value)}
@@ -71,7 +75,7 @@ function TodoItem(props) {
       <button onClick={editHandler}>{isEditTag?'edit':'update'}</button>
       <button onClick={deleteHandler}>Delete</button>
       <button onClick={()=>navigate(`/todos/${props.todoId}`)}>Add Tasks</button>
-    </div>
+    </li>
   );
 }
 
