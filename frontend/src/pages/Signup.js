@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { account } from "../config/appwriteConfig";
 import { ID } from "appwrite";
-import axios from "axios"
+import axios from "axios";
 
 function Signup() {
   const [user, setUser] = useState({ name: "", email: "", password: "" });
@@ -16,11 +16,15 @@ function Signup() {
         user.password,
         user.name
       );
-     
+      console.log(newUser);
 
-      // send data to backend 
-      
-      
+      // if succeeds, send data to backend & naviagate to homepage
+      await axios.post("/create", {
+        name: newUser.name,
+        email: newUser.email,
+        id: newUser.$id,
+      });
+      //   navigate('./')
     } catch (err) {
       console.log("Error: ", err.message);
     }
@@ -55,6 +59,7 @@ function Signup() {
           type="email"
           name="email"
           id="email"
+          required
           value={user.email}
           onChange={(e) => setUser({ ...user, email: e.target.value })}
         />
@@ -67,6 +72,7 @@ function Signup() {
           type="password"
           name="password"
           id="password"
+          required
           value={user.password}
           onChange={(e) => setUser({ ...user, password: e.target.value })}
         />
